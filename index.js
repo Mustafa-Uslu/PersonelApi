@@ -93,7 +93,7 @@ app.use('/documents/redoc', redoc({ specUrl: '/documents/json', title:'Redoc UI'
 
 /*----------------------------------------------*/
 //Morgan logger:
-app.use(require('./src/middlewares/logger'))
+//app.use(require('./src/middlewares/logger'))
 
 // Authentication
 app.use(require('./src/middlewares/authentication'))
