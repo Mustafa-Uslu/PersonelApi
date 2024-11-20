@@ -5,7 +5,7 @@
 const router = require('express').Router()
 /* ------------------------------------------------------- */
 
-const { list, create, read, update, delete: deleteToken } = require('../controllers/token')
+const { list, create, read, update, deleteToken } = require('../controllers/token')
 const { isAdmin } = require('../middlewares/permissions')
 
 // URL : /tokens
