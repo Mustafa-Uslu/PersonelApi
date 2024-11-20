@@ -29,7 +29,11 @@
   "paths": {
     "/auth/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login",
+        "description": "Login with username and password",
         "parameters": [
           {
             "name": "authorization",
@@ -39,14 +43,21 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "username": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "*String"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "String"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "*String"
                 }
               }
             }
@@ -59,9 +70,13 @@
         }
       }
     },
-    "/tokens/": {
+    "/auth/logout": {
       "get": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logout",
+        "description": "Delete token.",
         "parameters": [
           {
             "name": "authorization",
@@ -72,114 +87,17 @@
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          }
-        }
-      }
-    },
-    "/tokens/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted"
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "patch": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted"
           }
         }
       }
     },
     "/departments/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Departments"
+        ],
+        "summary": "List Departments",
+        "description": "\r  You can send query with endpoint for search[], sort[], page and limit.\r  <ul> Examples:\r  <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r  <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r  <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r  <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
         "parameters": [
           {
             "name": "authorization",
@@ -194,12 +112,24 @@
         }
       },
       "post": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Create Department",
         "description": "",
         "parameters": [
           {
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
           }
         ],
         "responses": {
@@ -211,6 +141,10 @@
     },
     "/departments/{id}": {
       "get": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Get Single Department",
         "description": "",
         "parameters": [
           {
@@ -232,6 +166,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Update Department",
         "description": "",
         "parameters": [
           {
@@ -244,6 +182,14 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
           }
         ],
         "responses": {
@@ -253,6 +199,10 @@
         }
       },
       "delete": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Delete Department",
         "description": "",
         "parameters": [
           {
@@ -268,12 +218,19 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
       "patch": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Update Department",
         "description": "",
         "parameters": [
           {
@@ -286,6 +243,14 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
           }
         ],
         "responses": {
@@ -297,6 +262,10 @@
     },
     "/departments/{id}/personnels": {
       "get": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Get Personnels of Department",
         "description": "",
         "parameters": [
           {
@@ -320,7 +289,11 @@
     },
     "/personnels/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Personnels"
+        ],
+        "summary": "List Personnels",
+        "description": "\r  You can send query with endpoint for search[], sort[], page and limit.\r  <ul> Examples:\r  <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r  <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r  <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r  <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
         "parameters": [
           {
             "name": "authorization",
@@ -335,12 +308,24 @@
         }
       },
       "post": {
+        "tags": [
+          "Personnels"
+        ],
+        "summary": "Create Personnel",
         "description": "",
         "parameters": [
           {
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Personnel"
+            }
           }
         ],
         "responses": {
@@ -352,6 +337,10 @@
     },
     "/personnels/{id}": {
       "get": {
+        "tags": [
+          "Personnels"
+        ],
+        "summary": "Get Single Personnel",
         "description": "",
         "parameters": [
           {
@@ -373,6 +362,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Personnels"
+        ],
+        "summary": "Update Personnel",
         "description": "",
         "parameters": [
           {
@@ -385,6 +378,14 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Personnel"
+            }
           }
         ],
         "responses": {
@@ -394,6 +395,10 @@
         }
       },
       "delete": {
+        "tags": [
+          "Personnels"
+        ],
+        "summary": "Delete Personnel",
         "description": "",
         "parameters": [
           {
@@ -409,12 +414,19 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
       "patch": {
+        "tags": [
+          "Personnels"
+        ],
+        "summary": "Update Personnel",
         "description": "",
         "parameters": [
           {
@@ -427,6 +439,14 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Personnel"
+            }
           }
         ],
         "responses": {
@@ -684,7 +704,7 @@
             },
             "default": {
               "type": "number",
-              "example": 1731581966096
+              "example": 1732111510173
             }
           }
         }
